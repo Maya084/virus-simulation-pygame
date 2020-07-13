@@ -92,7 +92,7 @@ class Tocka(pygame.sprite.Sprite):
         self.stapka_na_smrt = stapka_na_smrt
 
 
-class Simulation:
+class Simulacija:
     def __init__(self, width=600, height=480, sub_width=200):
         self.WIDTH = width
         self.HEIGHT = height
@@ -145,6 +145,7 @@ class Simulation:
             tocka = Tocka(x, y, self.pozicija_dijagram - 5, self.HEIGHT, color=RED, velocity=vel, randomize=randomize,)
             self.container_zarazeni.add(tocka)
             self.container_site.add(tocka)
+            tocka.killswitch(self.cycles_to_fate, self.stapka_na_smrt)
 
         vtor_del = pygame.Surface((self.sub_width, self.HEIGHT))
         vtor_del.fill(WHITE)
@@ -261,7 +262,7 @@ class Simulation:
 
 
 if __name__ == "__main__":
-    covid = Simulation(1250, 650, 350)
+    covid = Simulacija(1250, 650, 350)
     covid.N = COVID_19["Populacija"]
     covid.n_vo_izolacija = COVID_19["Broj_Vo_Izolacija"]
     covid.n_zarazeni = COVID_19["Zarazeni"]
